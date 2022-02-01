@@ -1,51 +1,59 @@
 const game = {
-  title: 'Guess the Number!',
-  biggestNum: 100,
-  smallestNum: 1,
-  prevGuess: [],
+  title: "Guess the Number!",
+  biggestNum: null,
+  smallestNum: null,
   secretNum: null,
   
-  play: function() {
-        this.secretNum = Math.floor(Math.random() * 
-          (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
-
-          do {
-            this.prevGuesses.push(this.getGuess());
-        } while (this.prevGuesses[this.prevGuesses.length - 1] !== this.secretNum);
-        this.setRange();
-        this.resetRange();
-        this.render();
-
-      },
-
+  prevGuesses: [],
+  play: function () {
+    
+    this.setRange()
+   
+    this.secretNum =
+      Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) +
+      this.smallestNum;
+ 
+    do {
+     
+      this.prevGuesses.push(this.getGuess());
+    
+      this.resetRange();
+     
+      this.render();
+   
+    } while (this.prevGuesses[this.prevGuesses.length - 1] !== this.secretNum);
+  },
   getGuess: function () {
-
+   
     let guess;
 
     do {
-     guess = parseInt(
+   
+      guess = parseInt(
         prompt(
           `Enter a guess between ${this.smallestNum} and ${this.biggestNum}`
         )
       );
-    } while (  isNaN(guess) || 
-      guess < this.smallestNum || um or...
-      guess > this.biggestNum 
+    } while ( 
+      isNaN(guess) || 
+      guess < this.smallestNum || 
+      guess > this.biggestNum
     )
 
+   
     return guess;
   },
-
   setRange: function() {
 
     do {
-    
+      
       this.smallestNum = parseInt(
         prompt(
           `Enter a number - this will be the low end of the range.`
         )
       );
     } while (isNaN(this.smallestNum)) 
+
     do {
       
       this.biggestNum = parseInt(
@@ -55,11 +63,11 @@ const game = {
       );
     } while ( 
       isNaN(this.biggestNum) || 
-      this.biggestNum < this.smallestNum + 2
+      this.biggestNum < this.smallestNum + 2 
     )
   },
-  
-  resetRange: function() {
+  // BONUS
+  resetRange: function () {
     
     if (this.prevGuesses[this.prevGuesses.length - 1] > this.secretNum) {
      
@@ -70,7 +78,7 @@ const game = {
     }
   },
   render: function () {
-    
+   
     let msg;
 
     
@@ -80,7 +88,7 @@ const game = {
         this.prevGuesses.length > 1 ? "guesses" : "guess"
       }!`;
     } else {
-      
+     
       msg = `Your guess is too ${
         this.prevGuesses[this.prevGuesses.length - 1] > this.secretNum
           ? "high"
@@ -92,3 +100,6 @@ const game = {
     alert(msg);
   },
 };
+
+
+game.play();
